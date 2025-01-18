@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpwkh4kcnbxq6"]
+
+[ext_resource type="Script" uid="uid://d00q8po3opt51" path="res://Levels/camera_3d.gd" id="2_18wwe"]
+[ext_resource type="PackedScene" uid="uid://c36176lpynnyo" path="res://Art/Prefabs(Scn)/player_humanoid.tscn" id="2_m2dkl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5i2cq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oeeku"]
+ground_color = Color(0.0663872, 0.0428719, 0.0188778, 1)
+
+[sub_resource type="Sky" id="Sky_nk5g1"]
+sky_material = SubResource("PhysicalSkyMaterial_oeeku")
+
+[sub_resource type="Environment" id="Environment_qn88h"]
+background_mode = 2
+sky = SubResource("Sky_nk5g1")
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_normalized = true
+glow_intensity = 0.1
+glow_blend_mode = 1
+fog_enabled = true
+fog_sun_scatter = 0.07
+fog_density = 0.003
+fog_aerial_perspective = 1.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ouky8"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(7.50034, 0, 0, 0, 0.20752, 0, 0, 0, 6.97273, 0.289214, 0.0929801, 0.693668)
+material_override = SubResource("StandardMaterial3D_5i2cq")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lights"]
+environment = SubResource("Environment_qn88h")
+camera_attributes = SubResource("CameraAttributesPractical_ouky8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_temperature = 5700.0
+light_energy = 5.0
+shadow_enabled = true
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.11
+directional_shadow_split_3 = 0.33
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 200.0
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("camera")]
+transform = Transform3D(-1, -7.43353e-05, 0.0002069, -1.25916e-08, 0.941122, 0.338067, -0.000219848, 0.338067, -0.941122, -5.15262e-05, 1.69313, 0.0297745)
+script = ExtResource("2_18wwe")
+camera = NodePath(".")
+
+[node name="PlayerHumanoid" parent="." instance=ExtResource("2_m2dkl")]

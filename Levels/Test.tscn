@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://28a75u61mfl4"]
+
+[ext_resource type="PackedScene" uid="uid://cep8rlu0y23n7" path="res://Art/Prefabs(Scn)/player_prototype.tscn" id="2_6sx0d"]
+[ext_resource type="Texture2D" uid="uid://kd7krm2om53y" path="res://Art/Textures/Prototype Textures/Vector/texture_02.svg" id="2_tqagu"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_gb0dq"]
+ground_color = Color(0.0663872, 0.0428719, 0.0188778, 1)
+
+[sub_resource type="Sky" id="Sky_1uvue"]
+sky_material = SubResource("PhysicalSkyMaterial_gb0dq")
+
+[sub_resource type="Environment" id="Environment_gdpxl"]
+background_mode = 2
+sky = SubResource("Sky_1uvue")
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.1
+glow_blend_mode = 1
+fog_enabled = true
+fog_sun_scatter = 0.07
+fog_density = 0.003
+fog_aerial_perspective = 1.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gl3nt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip06m"]
+albedo_texture = ExtResource("2_tqagu")
+uv1_scale = Vector3(20, -20, -20)
+
+[node name="Node" type="Node"]
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lights"]
+environment = SubResource("Environment_gdpxl")
+camera_attributes = SubResource("CameraAttributesPractical_gl3nt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_temperature = 5700.0
+light_energy = 5.0
+shadow_enabled = true
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.11
+directional_shadow_split_3 = 0.33
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 200.0
+
+[node name="TestWorld" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="TestWorld"]
+transform = Transform3D(2.30741, 0, 0, 0, 2.30741, 0, 0, 0, 2.30741, 0, 0, 0)
+use_collision = true
+size = Vector3(200, 1, 200)
+material = SubResource("StandardMaterial3D_ip06m")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TestWorld"]
+transform = Transform3D(4.99931, 0, 0, 0, 4.85049, -2.61264, 0, 1.21071, 10.4671, 0, -0.00779271, -15.2456)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TestWorld"]
+transform = Transform3D(3.87537, 0, 0, 0, 0.437944, 0, 0, 0, 2.85756, -3.25414, 3.10888, 0)
+use_collision = true
+
+[node name="PlayerPrototype" parent="." instance=ExtResource("2_6sx0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63238, 0)
+
+[node name="GeneralSkeleton" parent="PlayerPrototype/MeshRoot/PlayerHumanoid" index="0"]
+bones/7/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/8/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/21/rotation = Quaternion(-0.214187, 0.673887, 0.214187, 0.673887)
+bones/22/rotation = Quaternion(-1.49011e-08, 0, 0, 1)
+bones/24/rotation = Quaternion(-0.609178, -0.458816, 0.125681, 0.634504)
+bones/25/rotation = Quaternion(0.668651, 0.613857, 0.29484, -0.298589)
+bones/28/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/29/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/42/rotation = Quaternion(-0.214187, -0.673887, -0.214187, 0.673887)
+bones/43/rotation = Quaternion(-1.49011e-08, 0, 0, 1)
+bones/45/rotation = Quaternion(0.558443, -0.0708396, -0.470414, 0.679584)
+bones/46/rotation = Quaternion(0.178241, 0.396723, -0.553499, 0.710267)
+bones/51/rotation = Quaternion(-0.535939, 0.491044, 0.543917, -0.419285)
+bones/52/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/54/rotation = Quaternion(-0.52341, 0.447925, -0.488077, 0.535897)
+bones/57/rotation = Quaternion(-0.419285, -0.543918, 0.491043, 0.535938)
+bones/58/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/60/rotation = Quaternion(0.535896, 0.488077, 0.447926, 0.523411)
+bones/62/rotation = Quaternion(0.0205303, -0.712233, 0.0117235, 0.701545)
+bones/63/rotation = Quaternion(-0.701544, 0.0117242, 0.712233, 0.020531)
+bones/65/rotation = Quaternion(0.61885, -0.0695412, 0.389136, 0.678795)
+bones/66/rotation = Quaternion(0.687474, -0.614358, 0.387225, 1.08376e-07)
+
+[editable path="PlayerPrototype"]
